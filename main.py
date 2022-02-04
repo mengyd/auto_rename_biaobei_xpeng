@@ -53,8 +53,12 @@ def rename(data_repo, filename_repo, index_file):
             if datanumber in index:
                 mobilefile = index[datanumber]
                 newname = filenames[mobile_data_relatiion[mobilefile]]+'.raw'
-                print(data.name+' : '+newname)
-                os.rename(data.path, data_repo+'\\'+newname)
+                if not os.path.exists(data_repo+'\\'+newname):
+                    try:
+                        print(data.name+' : '+newname)
+                        os.rename(data.path, data_repo+'\\'+newname)
+                    except Exception:
+                        pass
             else :
                 os.remove(data.path)
 
@@ -63,17 +67,20 @@ def rename(data_repo, filename_repo, index_file):
 if __name__ == '__main__':
     while True:
         data_repo = input("数据文件夹:")
+        data_repo = data_repo.strip('"')
         if data_repo and os.path.isdir(data_repo):
             print(data_repo)
             break
 
     while True:
         filename_repo = input("语料文件夹:")
+        filename_repo = filename_repo.strip('"')
         if filename_repo and os.path.isdir(filename_repo):
             break
 
     while True:
         index_file = input("索引文件:")
+        index_file = index_file.strip('"')
         if index_file and os.path.exists(index_file):
             break
 
