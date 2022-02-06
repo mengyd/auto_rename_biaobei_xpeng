@@ -85,3 +85,5 @@ if __name__ == '__main__':
             break
 
     rename(data_repo, filename_repo, index_file)
+        # pause
+    os.system('pause')
