@@ -1,5 +1,7 @@
 import os, unicodedata
 
+from numpy import true_divide
+
 def isNumber(s):
     try:
         float(s)
@@ -13,6 +15,11 @@ def isNumber(s):
     except (TypeError, ValueError):
         pass
  
+    return False
+
+def isOriginRawData(s):
+    if s.endswith('.raw') and s.startswith('xp_record_file_'):
+        return True
     return False
 
 def readIndex(filename):
@@ -59,7 +66,7 @@ def rename(data_repo, filename_repo, index_file):
                         os.rename(data.path, data_repo+'\\'+newname)
                     except Exception:
                         pass
-            else :
+            elif isOriginRawData(data.name) :
                 os.remove(data.path)
 
 
