@@ -18,7 +18,7 @@ def isNumber(s):
     return False
 
 def isOriginRawData(s):
-    if s.endswith('.raw') or s.endswith('.raw_tmp') and s.startswith('xp_record_file_'):
+    if (s.endswith('.raw') or s.endswith('.raw_tmp')) and s.startswith('xp_record_file_'):
         return True
     return False
 
