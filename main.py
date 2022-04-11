@@ -38,19 +38,20 @@ def readFilenames(filename_repo):
     with os.scandir(filename_repo) as filelist:
         for file in filelist:
             filename = file.name.split('.')[0]
-            fileindex = filename.split('_')[5] + '_' + filename[-1]
+            if filename.split('_')[5] == '5' or filename.split('_')[5] == '6':
+                fileindex = filename.split('_')[5]
+            else:
+                fileindex = filename.split('_')[5] + '_' + filename[-1]
             filenames[fileindex] = filename
     print(filenames)
     return filenames
 
 
 def rename(data_repo, filename_repo, index_file):
-    mobile_data_relatiion = {
+    mobile_data_relation = {
     '1':'1_1', '2':'1_2', '3':'2_1', '4':'2_2', 
     '5':'3_1', '6':'3_2', '7':'4_1', '8':'4_2', 
-    '9':'5_1', '10':'5_2', '11':'6_1', '12':'6_2', 
-    '13':'7_1', '14':'7_2', '15':'8_1', '16':'8_2'
-    }
+    '9':'5', '10':'6'}
     filenames = readFilenames(filename_repo)
     index = readIndex(index_file)
     with os.scandir(data_repo) as datalist:
@@ -59,7 +60,7 @@ def rename(data_repo, filename_repo, index_file):
             datanumber = dataname.split('_')[-1]
             if datanumber in index:
                 mobilefile = index[datanumber]
-                newname = filenames[mobile_data_relatiion[mobilefile]]+'.raw'
+                newname = filenames[mobile_data_relation[mobilefile]]+'.raw'
                 if not os.path.exists(data_repo+'\\'+newname):
                     try:
                         print(data.name+' : '+newname)
