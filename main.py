@@ -1,7 +1,5 @@
 import os, unicodedata
 
-from numpy import true_divide
-
 def isNumber(s):
     try:
         float(s)
