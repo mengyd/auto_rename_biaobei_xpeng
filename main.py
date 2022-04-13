@@ -1,4 +1,5 @@
 import os, unicodedata
+from loadConfig import loadRelation
 
 def isNumber(s):
     try:
@@ -46,10 +47,7 @@ def readFilenames(filename_repo):
 
 
 def rename(data_repo, filename_repo, index_file):
-    mobile_data_relation = {
-    '1':'1_1', '2':'1_2', '3':'2_1', '4':'2_2', 
-    '5':'3_1', '6':'3_2', '7':'4_1', '8':'4_2', 
-    '9':'5', '10':'6'}
+    mobile_data_relation = loadRelation()
     filenames = readFilenames(filename_repo)
     index = readIndex(index_file)
     with os.scandir(data_repo) as datalist:
